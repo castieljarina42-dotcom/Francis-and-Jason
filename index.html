@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Castiel & Ben — Student Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1A1A2E; --paper:#FFFDF7;
+    --coral:#FF4E6A; --blue:#4D7CFE; --yellow:#FFC93C; --teal:#2EC4B6;
+    padding-top: env(safe-area-inset-top,0px);
+    padding-bottom: env(safe-area-inset-bottom,0px);
+    box-sizing:border-box;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth; scroll-padding-top:env(safe-area-inset-top,0px);}
+  body{background:var(--paper); color:var(--ink); font-family:'Inter',sans-serif; overflow-x:hidden;}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif; line-height:1.05;}
+  a{color:inherit;}
+  section{padding:5rem 6vw; max-width:1100px; margin:0 auto;}
+  @media(max-width:640px){ section{padding:3.5rem 6vw;} }
+
+  /* Nav */
+  nav{position:sticky; top:env(safe-area-inset-top,0px); z-index:10; display:flex; justify-content:space-between; align-items:center; padding:1.2rem 6vw; background:var(--paper); border-bottom:3px solid var(--ink);}
+  .nav-mark{font-weight:700; font-size:1.1rem;}
+  .nav-links{display:flex; gap:1.6rem; font-weight:500; font-size:.95rem;}
+  .nav-links a{text-decoration:none; border-bottom:2px solid transparent; padding-bottom:2px;}
+  .nav-links a:hover, .nav-links a:focus-visible{border-color:var(--coral);}
+
+  /* Hero */
+  .hero{padding:4.5rem 6vw 3rem; position:relative;}
+  .hero h1{font-size:clamp(2.6rem,8vw,5.4rem); letter-spacing:-.02em;}
+  .hero .names{display:block;}
+  .hero .names span{position:relative; white-space:nowrap;}
+  .hero .names .amp{color:var(--coral); font-style:normal; padding:0 .1em;}
+  .hero p.tagline{margin-top:1.4rem; font-size:1.15rem; max-width:38ch; color:#4a4a5e;}
+  .swatch-row{display:flex; gap:.5rem; margin-top:2rem;}
+  .swatch{width:2.2rem; height:2.2rem; border-radius:50%; border:2px solid var(--ink);}
+
+  /* Split intro */
+  .duo{display:grid; grid-template-columns:1fr 1fr; gap:0; border:3px solid var(--ink);}
+  @media(max-width:720px){ .duo{grid-template-columns:1fr;} }
+  .duo > div{padding:2.4rem; position:relative;}
+  .duo > div:first-child{background:var(--blue); color:var(--paper); border-right:3px solid var(--ink);}
+  @media(max-width:720px){ .duo > div:first-child{border-right:none; border-bottom:3px solid var(--ink);} }
+  .duo > div:last-child{background:var(--yellow);}
+  .duo h3{font-size:1.7rem; margin-bottom:.6rem;}
+  .duo .role{font-weight:600; font-size:.85rem; text-transform:uppercase; letter-spacing:.06em; opacity:.85; margin-bottom:.9rem;}
+  .duo p.bio{font-size:.98rem; line-height:1.55;}
+
+  /* Section headers */
+  .section-head{display:flex; align-items:baseline; gap:.8rem; margin-bottom:2.2rem;}
+  .section-head h2{font-size:clamp(1.8rem,4vw,2.6rem);}
+  .section-head .dot{width:14px; height:14px; border-radius:50%; background:var(--coral); flex-shrink:0;}
+
+  /* Projects */
+  .projects{display:grid; grid-template-columns:1fr 1fr; gap:1.4rem;}
+  @media(max-width:720px){ .projects{grid-template-columns:1fr;} }
+  .card{border:3px solid var(--ink); padding:1.8rem; background:var(--paper); position:relative; transition:transform .15s ease;}
+  .card:hover, .card:focus-within{transform:translate(-3px,-3px); box-shadow:5px 5px 0 var(--ink);}
+  .card .tag{display:inline-block; font-size:.75rem; font-weight:600; text-transform:uppercase; letter-spacing:.05em; padding:.25rem .6rem; border-radius:100px; margin-bottom:.9rem;}
+  .card h3{font-size:1.3rem; margin-bottom:.5rem;}
+  .card p{font-size:.95rem; color:#4a4a5e; line-height:1.5;}
+  .card .who{margin-top:1rem; font-size:.82rem; font-weight:600;}
+  .tag.blue{background:var(--blue); color:var(--paper);}
+  .tag.teal{background:var(--teal); color:var(--ink);}
+  .tag.coral{background:var(--coral); color:var(--paper);}
+  .tag.yellow{background:var(--yellow); color:var(--ink);}
+
+  /* Skills */
+  .skills-wrap{display:grid; grid-template-columns:1fr 1fr; gap:2rem;}
+  @media(max-width:720px){ .skills-wrap{grid-template-columns:1fr;} }
+  .skill-col h4{font-size:1.05rem; margin-bottom:.8rem;}
+  .pills{display:flex; flex-wrap:wrap; gap:.5rem;}
+  .pill{border:2px solid var(--ink); padding:.35rem .8rem; border-radius:100px; font-size:.85rem; font-weight:500;}
+
+  /* Contact */
+  .contact{background:var(--ink); color:var(--paper); border-radius:0;}
+  .contact h2{font-size:clamp(2rem,5vw,3rem); margin-bottom:1rem;}
+  .contact p{color:#c9c9d8; max-width:42ch; margin-bottom:2rem;}
+  .contact-grid{display:flex; flex-wrap:wrap; gap:2.5rem;}
+  .contact-block .label{font-size:.78rem; text-transform:uppercase; letter-spacing:.06em; color:var(--yellow); margin-bottom:.4rem; font-weight:600;}
+  .contact-block a{text-decoration:none; font-size:1.05rem; font-weight:500; border-bottom:2px solid var(--coral);}
+
+  footer{text-align:center; padding:2rem; font-size:.85rem; color:#8a8a9a;}
+
+  :focus-visible{outline:3px solid var(--coral); outline-offset:2px;}
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important; scroll-behavior:auto !important;} }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-mark">Castiel &amp; Ben</div>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1 class="names"><span>Castiel <span class="amp">&amp;</span> Ben</span></h1>
+  <p class="tagline">Two students, one shared love of building things that work — and look good doing it. This is a snapshot of what we've made so far.</p>
+  <div class="swatch-row" aria-hidden="true">
+    <div class="swatch" style="background:var(--coral)"></div>
+    <div class="swatch" style="background:var(--blue)"></div>
+    <div class="swatch" style="background:var(--yellow)"></div>
+    <div class="swatch" style="background:var(--teal)"></div>
+  </div>
+</section>
+
+<section>
+  <div class="duo">
+    <div>
+      <div class="role">Castiel — age 13</div>
+      <h3>Builder who loves sports, anime &amp; games</h3>
+      <p class="bio">When he's not coding, you'll find him playing sports, watching anime, or gaming. Currently learning how to put that same energy into building things on the web.</p>
+    </div>
+    <div>
+      <div class="role">Ben — age 14</div>
+      <h3>The one who makes everyone laugh</h3>
+      <p class="bio">Big on video games, biking, and food — and making people laugh along the way. Brings that same playful energy to every project.</p>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="section-head"><span class="dot"></span><h2>Selected work</h2></div>
+  <div class="projects">
+    <div class="card">
+      <span class="tag blue">Web app</span>
+      <h3>Campus Eats</h3>
+      <p>A real-time map of dining hall wait times, built for our university's hackathon. Scraped and cached live data, deployed to 400+ users in launch week.</p>
+      <div class="who">Castiel &amp; Ben — joint project</div>
+    </div>
+    <div class="card">
+      <span class="tag coral">Case study</span>
+      <h3>Redesigning the library site</h3>
+      <p>A coursework project rethinking the university library's catalog search — from paper wireframes to a working prototype.</p>
+      <div class="who">Ben — solo project</div>
+    </div>
+    <div class="card">
+      <span class="tag teal">Data tool</span>
+      <h3>Study Pulse</h3>
+      <p>A small script (and dashboard) that pulls study-group check-ins and visualizes how attendance shifts across a semester.</p>
+      <div class="who">Castiel — solo project</div>
+    </div>
+    <div class="card">
+      <span class="tag yellow">Open source</span>
+      <h3>Course-notes template</h3>
+      <p>A Markdown-based note template + build script used by a few hundred classmates to keep lecture notes searchable.</p>
+      <div class="who">Castiel &amp; Ben — joint project</div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-head"><span class="dot"></span><h2>What we're into</h2></div>
+  <div class="skills-wrap">
+    <div class="skill-col">
+      <h4>Castiel</h4>
+      <div class="pills">
+        <span class="pill">Sports</span><span class="pill">Anime</span><span class="pill">Video games</span>
+      </div>
+    </div>
+    <div class="skill-col">
+      <h4>Ben</h4>
+      <div class="pills">
+        <span class="pill">Video games</span><span class="pill">Biking</span><span class="pill">Food</span><span class="pill">Making people laugh</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <h2>Let's talk</h2>
+  <p>Say hi, or just tell us your favorite video game.</p>
+  <div class="contact-grid">
+    <div class="contact-block">
+      <div class="label">Castiel</div>
+      <a href="mailto:castiel@example.com">castiel@example.com</a>
+    </div>
+    <div class="contact-block">
+      <div class="label">Ben</div>
+      <a href="mailto:ben@example.com">ben@example.com</a>
+    </div>
+  </div>
+</section>
+
+<footer>Built by Castiel
